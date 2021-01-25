@@ -1,15 +1,10 @@
 import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 
-export default function DetailsScreen({navigation, route}) {
-  const {itemId} = route.params;
-
-  navigation.setOptions({title: 'Updated!'});
-
+export default function PostsScreen() {
   return (
     <View style={styles.container}>
-      <Text>Details Screen</Text>
-      <Text>Item ID : {itemId}</Text>
+      <Text>Posts Screen</Text>
     </View>
   );
 }
