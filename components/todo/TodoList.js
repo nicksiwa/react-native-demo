@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {List, Divider} from '@ui-kitten/components';
+import {getTodos} from '../../services';
 import TodoItem from './TodoItem';
 
 export default function TodoList(props) {
@@ -11,17 +12,16 @@ export default function TodoList(props) {
   );
 
   useEffect(() => {
-    const getTodos = async () => {
+    const handleGetTodos = async () => {
       try {
-        const res = await fetch('http://10.0.2.2:5000/todos');
-        const data = await res.json();
-        setTodos(data);
+        const res = await getTodos();
+        setTodos(res.data);
       } catch (err) {
         console.log(err);
       }
     };
 
-    getTodos();
+    handleGetTodos();
   }, []);
 
   return (

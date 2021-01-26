@@ -1,16 +1,17 @@
 import React, {useEffect, useState} from 'react';
 import {Text} from 'react-native';
 import {Card, Layout} from '@ui-kitten/components';
+import {getTodoById} from '../../services';
 
-export default function TodoDetailScreen() {
+export default function TodoDetailScreen({route}) {
+  const {todoId} = route.params;
   const [todo, setTodo] = useState(null);
 
   useEffect(() => {
     const getTodo = async () => {
       try {
-        const res = await fetch('http://10.0.2.2:5000/todos/1');
-        const data = await res.json();
-        setTodo(data);
+        const res = await getTodoById(todoId);
+        setTodo(res.data);
       } catch (err) {
         console.log(err);
       }
