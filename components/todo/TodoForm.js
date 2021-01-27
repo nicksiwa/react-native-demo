@@ -1,13 +1,15 @@
 import React from 'react';
 import {View} from 'react-native';
+import {useDispatch} from 'react-redux';
 import {useForm, Controller} from 'react-hook-form';
 import {Input, Button} from '@ui-kitten/components';
-import {postTodo} from '../../services';
+import {createTodo} from '../../redux/actions/todoAction';
 
 export default function TodoForm() {
   const initailData = {completed: false};
   const {control, handleSubmit, errors} = useForm();
-  const onSubmit = (data) => postTodo({...data, ...initailData});
+  const dispatch = useDispatch();
+  const onSubmit = (data) => dispatch(createTodo({...data, ...initailData}));
 
   return (
     <View>
