@@ -4,7 +4,7 @@ import {Text} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import {List, Divider} from '@ui-kitten/components';
 import TodoItem from './TodoItem';
-import {fetchTodo} from '../../redux/actions/todoAction';
+import {TODO} from '../../redux/actionTypes';
 
 export default function TodoList(props) {
   const {handleClickTodoItem} = props;
@@ -12,7 +12,7 @@ export default function TodoList(props) {
   const dispatch = useDispatch();
   const todo = useSelector((state) => state.todo);
 
-  const handleFetchTodo = () => dispatch(fetchTodo());
+  const handleFetchTodo = () => dispatch({type: TODO.FETCH_TODO_REQUEST});
   const renderTodoItem = ({item}) => (
     <TodoItem item={item} handleClickTodoItem={handleClickTodoItem} />
   );
