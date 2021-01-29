@@ -1,6 +1,6 @@
 import {takeEvery, put} from 'redux-saga/effects';
-import {TODO} from '../actionTypes';
-import {getTodos} from '../../services';
+import {TODO} from '../../actionTypes';
+import {getTodos} from '../../../services';
 
 const fetchTodoPendingAction = () => ({
   type: TODO.FETCH_TODO_PENDING,

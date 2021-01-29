@@ -1,6 +1,7 @@
 import {all} from 'redux-saga/effects';
-import {watchFetchTodoAction} from './todoAction';
+import {watchFetchTodoAction} from './todo/fetchTodoAction';
+import {watchToggleTodoAction} from './todo/toggleTodoAction';
 
 export default function* rootSaga() {
-  yield all([watchFetchTodoAction()]);
+  yield all([watchFetchTodoAction(), watchToggleTodoAction()]);
 }

@@ -1,3 +1,10 @@
-import {getTodos, getTodoById, postTodo} from './todoService';
+import {
+  getTodos,
+  getTodoById,
+  postTodo,
+  updateTodo,
+  deleteTodo,
+  toggleTodo,
+} from './todoService';
 
-export {getTodos, getTodoById, postTodo};
+export {getTodos, getTodoById, postTodo, updateTodo, deleteTodo, toggleTodo};

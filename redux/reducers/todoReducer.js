@@ -39,6 +39,15 @@ export default function todoReducer(state = initialState, action) {
         ...state,
         isError: true,
       };
+    case TODO.TOGGLE_TODO_SUCCESS:
+      const index = state.todos.findIndex((todo) => todo.id === action.id);
+      const newArray = [...state.todos];
+      newArray[index].completed = action.payload;
+
+      return {
+        ...state,
+        todos: newArray,
+      };
     default:
       return state;
   }
