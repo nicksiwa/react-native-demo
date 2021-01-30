@@ -3,13 +3,17 @@ import {View} from 'react-native';
 import {useDispatch} from 'react-redux';
 import {useForm, Controller} from 'react-hook-form';
 import {Input, Button} from '@ui-kitten/components';
-import {createTodo} from '../../redux/actions/todoAction';
+import {TODO} from '../../redux/actionTypes';
 
 export default function TodoForm() {
   const initailData = {completed: false};
   const {control, handleSubmit, errors} = useForm();
   const dispatch = useDispatch();
-  const onSubmit = (data) => dispatch(createTodo({...data, ...initailData}));
+  const onSubmit = (data) =>
+    dispatch({
+      type: TODO.CREATE_TODO_REQUEST,
+      payload: {...initailData, ...data},
+    });
 
   return (
     <View>
