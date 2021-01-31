@@ -17,7 +17,7 @@ export default function TodoItem({item, handleClickTodoItem}) {
     <TodoCheckbox checked={completed} onChange={handleToggleTodo} />
   );
 
-  const renderMenu = () => <TodoItemMenu />;
+  const renderMenu = () => <TodoItemMenu todoId={id} />;
 
   return (
     <ListItem

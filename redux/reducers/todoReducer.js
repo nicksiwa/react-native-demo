@@ -1,3 +1,4 @@
+import { atan } from 'react-native-reanimated';
 import {TODO} from '../actionTypes';
 
 const initialState = {
@@ -47,6 +48,11 @@ export default function todoReducer(state = initialState, action) {
       return {
         ...state,
         todos: newArray,
+      };
+    case TODO.DELETE_TODO_SUCCESS:
+      return {
+        ...state,
+        todos: state.todos.filter((todo) => todo.id !== action.id),
       };
     default:
       return state;
