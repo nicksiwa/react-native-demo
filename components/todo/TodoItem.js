@@ -1,8 +1,9 @@
 import React from 'react';
 import {useDispatch} from 'react-redux';
 import {ListItem} from '@ui-kitten/components';
-import TodoCheckbox from './TodoCheckbox';
 import {TODO} from '../../redux/actionTypes';
+import TodoCheckbox from './TodoCheckbox';
+import TodoItemMenu from './TodoItemMenu';
 
 export default function TodoItem({item, handleClickTodoItem}) {
   const {id, title, completed} = item;
@@ -16,12 +17,14 @@ export default function TodoItem({item, handleClickTodoItem}) {
     <TodoCheckbox checked={completed} onChange={handleToggleTodo} />
   );
 
+  const renderMenu = () => <TodoItemMenu />;
+
   return (
     <ListItem
       title={title}
-      description={completed ? 'Completed' : 'Incomplete'}
       onPress={() => handleClickTodoItem(id)}
-      accessoryRight={renderTodoCheckbox}
+      accessoryLeft={renderTodoCheckbox}
+      accessoryRight={renderMenu}
     />
   );
 }
