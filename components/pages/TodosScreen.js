@@ -10,10 +10,17 @@ export default function TodosScreen({navigation}) {
     navigate('TodoDetail', {todoId: todoId});
   };
 
+  const handleClickEditTodo = (todoId) => {
+    navigate('TodoEditor', {todoId: todoId});
+  };
+
   return (
     <View>
-      <TodoForm />
-      <TodoList handleClickTodoItem={handleClickTodoItem} />
+      <TodoForm initialValue={null} />
+      <TodoList
+        handleClickTodoItem={handleClickTodoItem}
+        handleClickEditTodo={handleClickEditTodo}
+      />
     </View>
   );
 }

@@ -1,15 +1,18 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, {useEffect} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
 import {Text} from 'react-native';
-import {Card, Layout} from '@ui-kitten/components';
+import {useDispatch, useSelector} from 'react-redux';
+import {Layout} from '@ui-kitten/components';
 import {TODO} from '../../redux/actionTypes';
+import TodoForm from '../todo/TodoForm';
 
-export default function TodoDetailScreen({route}) {
+export default function TodoEditScreen({route, navigation}) {
   const dispatch = useDispatch();
   const todo = useSelector((state) => state.todo);
   const {todoId} = route.params;
   const {currentTodo} = todo;
+
+  const handleBackToTodoList = () => navigation.navigate('Todos');
 
   useEffect(() => {
     dispatch({
@@ -18,14 +21,16 @@ export default function TodoDetailScreen({route}) {
     });
   }, []);
 
+  if (todo.isLoading) {
+    return <Text>Loading</Text>;
+  }
+
   return (
     <Layout>
-      <Card>
-        <Text>{currentTodo && currentTodo.title}</Text>
-        <Text>
-          {currentTodo && currentTodo.completed ? 'Completed' : 'Incomplete'}
-        </Text>
-      </Card>
+      <TodoForm
+        initialValue={currentTodo}
+        handleBackToTodoList={handleBackToTodoList}
+      />
     </Layout>
   );
 }

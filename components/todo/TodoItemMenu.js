@@ -3,7 +3,7 @@ import {useDispatch} from 'react-redux';
 import {Button, Icon, OverflowMenu, MenuItem} from '@ui-kitten/components';
 import {TODO} from '../../redux/actionTypes';
 
-export default function TodoItemMenu({todoId}) {
+export default function TodoItemMenu({todoId, handleClickEditTodo}) {
   const dispatch = useDispatch();
   const [visible, setVisible] = useState(false);
 
@@ -13,6 +13,11 @@ export default function TodoItemMenu({todoId}) {
 
   const handleDeleteTodo = () => {
     dispatch({type: TODO.DELETE_TODO_REQUEST, id: todoId});
+  };
+
+  const handleClickEdit = () => {
+    handleClickEditTodo(todoId);
+    setVisible(false);
   };
 
   const renderMoreVerticalIcon = (props) => (
@@ -32,7 +37,7 @@ export default function TodoItemMenu({todoId}) {
       visible={visible}
       anchor={renderMenuIcon}
       onBackdropPress={handleHideMenu}>
-      <MenuItem title="Edit" />
+      <MenuItem title="Edit" onPress={handleClickEdit} />
       <MenuItem title="Delete" onPress={handleDeleteTodo} />
     </OverflowMenu>
   );

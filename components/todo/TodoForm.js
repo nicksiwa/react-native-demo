@@ -5,21 +5,41 @@ import {useForm, Controller} from 'react-hook-form';
 import {Input, Button} from '@ui-kitten/components';
 import {TODO} from '../../redux/actionTypes';
 
-export default function TodoForm() {
-  const initailData = {completed: false};
-  const {control, handleSubmit, errors} = useForm();
+export default function TodoForm({initialValue, handleBackToTodoList}) {
   const dispatch = useDispatch();
-  const onSubmit = (data) =>
-    dispatch({
-      type: TODO.CREATE_TODO_REQUEST,
-      payload: {...initailData, ...data},
-    });
+  const initailData = {completed: false};
+
+  const {control, errors, handleSubmit, reset} = useForm({
+    defaultValues: {
+      id: initialValue && initialValue.id,
+      title: initialValue && initialValue.title,
+      completed: initialValue && initialValue.completed,
+    },
+  });
+
+  const onSubmit = (data) => {
+    if (initialValue) {
+      dispatch({
+        type: TODO.EDIT_TODO_REQUEST,
+        id: initialValue.id,
+        payload: {...initialValue, ...data},
+      });
+
+      handleBackToTodoList();
+    } else {
+      dispatch({
+        type: TODO.CREATE_TODO_REQUEST,
+        payload: {...initailData, ...data},
+      });
+    }
+
+    reset();
+  };
 
   return (
     <View>
       <Controller
         name="title"
-        defaultValue=""
         control={control}
         rules={{required: true}}
         render={({onChange, onBlur, value}) => (

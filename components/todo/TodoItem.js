@@ -5,7 +5,11 @@ import {TODO} from '../../redux/actionTypes';
 import TodoCheckbox from './TodoCheckbox';
 import TodoItemMenu from './TodoItemMenu';
 
-export default function TodoItem({item, handleClickTodoItem}) {
+export default function TodoItem({
+  item,
+  handleClickTodoItem,
+  handleClickEditTodo,
+}) {
   const {id, title, completed} = item;
   const dispatch = useDispatch();
 
@@ -17,7 +21,9 @@ export default function TodoItem({item, handleClickTodoItem}) {
     <TodoCheckbox checked={completed} onChange={handleToggleTodo} />
   );
 
-  const renderMenu = () => <TodoItemMenu todoId={id} />;
+  const renderMenu = () => (
+    <TodoItemMenu todoId={id} handleClickEditTodo={handleClickEditTodo} />
+  );
 
   return (
     <ListItem
